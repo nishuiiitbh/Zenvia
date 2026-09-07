@@ -1,6 +1,26 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { Route, Routes, useLocation } from 'react-router-dom'
+import Registration from './pages/Registration'
+import Home from './pages/Home'
+import Login from './pages/Login'
+import Nav from './component/Nav'
+import { userDataContext } from './context/UserContext'
 
 function App() {
-  
+  let { userData } = useContext(userDataContext)
+  let location = useLocation()
+
+  return (
+    <>
+      {userData && location.pathname !== "/login" && location.pathname !== "/signup" && <Nav />}
+
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/signup' element={<Registration />} />
+      </Routes>
+    </>
+  )
 }
+
 export default App
