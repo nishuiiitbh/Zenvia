@@ -14,6 +14,7 @@ import { authDataContext } from "../context/authContext";
 function Nav() {
   let { getCurrentUser, userData } = useContext(userDataContext);
   let { serverUrl } = useContext(authDataContext);
+  let [search, setSearch] = useState("");
   let [showSearch, setShowSearch] = useState(false);
   let [showProfile, setShowProfile] = useState(false);
   let navigate = useNavigate();
@@ -34,7 +35,7 @@ function Nav() {
     <div className="w-[100vw] h-[70px] bg-[#ecfafaec] z-10 fixed top-0 flex  items-center justify-between px-[30px] shadow-md shadow-black ">
       <div className="w-[20%] lg:w-[30%] flex items-center justify-start   gap-[10px] ">
         <img src={logo} alt="" className="w-[30px]" />
-        <h1 className="text-[25px] text-[black] font-sans ">OneCart</h1>
+        <h1 className="text-[25px] text-[black] font-sans ">Zenvia</h1>
       </div>
       <div className="w-[50%] lg:w-[40%] hidden md:flex">
         <ul className="flex items-center justify-center gap-[19px] text-[white] ">
@@ -44,21 +45,13 @@ function Nav() {
           >
             HOME
           </li>
-          <li
-            className="text-[15px] hover:bg-slate-500 cursor-pointer bg-[#000000c9] py-[10px] px-[20px] rounded-2xl"
-            
-          >
+          <li className="text-[15px] hover:bg-slate-500 cursor-pointer bg-[#000000c9] py-[10px] px-[20px] rounded-2xl">
             COLLECTIONS
           </li>
-          <li
-            className="text-[15px] hover:bg-slate-500 cursor-pointer bg-[#000000c9] py-[10px] px-[20px] rounded-2xl"
-          >
+          <li className="text-[15px] hover:bg-slate-500 cursor-pointer bg-[#000000c9] py-[10px] px-[20px] rounded-2xl">
             ABOUT
           </li>
-          <li
-            className="text-[15px] hover:bg-slate-500 cursor-pointer bg-[#000000c9] py-[10px] px-[20px] rounded-2xl"
-            
-          >
+          <li className="text-[15px] hover:bg-slate-500 cursor-pointer bg-[#000000c9] py-[10px] px-[20px] rounded-2xl">
             CONTACT
           </li>
         </ul>
@@ -69,7 +62,6 @@ function Nav() {
             className="w-[38px] h-[38px] text-[#000000]  cursor-pointer"
             onClick={() => {
               setShowSearch((prev) => !prev);
-         
             }}
           />
         )}
@@ -138,7 +130,6 @@ function Nav() {
             <li
               className="w-[100%] hover:bg-[#2f2f2f]  px-[15px] py-[10px] cursor-pointer"
               onClick={() => {
-                
                 setShowProfile(false);
               }}
             >
@@ -147,7 +138,6 @@ function Nav() {
             <li
               className="w-[100%] hover:bg-[#2f2f2f]  px-[15px] py-[10px] cursor-pointer"
               onClick={() => {
-                
                 setShowProfile(false);
               }}
             >

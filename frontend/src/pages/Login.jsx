@@ -67,13 +67,13 @@ function Login() {
         onClick={() => navigate("/")}
       >
         <img className="w-[40px]" src={Logo} alt="" />
-        <h1 className="text-[22px] font-sans ">OneCart</h1>
+        <h1 className="text-[22px] font-sans ">Zenvia</h1>
       </div>
 
       <div className="w-[100%] h-[100px] flex items-center justify-center flex-col gap-[10px]">
         <span className="text-[25px] font-semibold">Login Page</span>
         <span className="text-[16px]">
-          Welcome to OneCart, Place your order
+          Welcome to Zenvia, Place your order
         </span>
       </div>
 
