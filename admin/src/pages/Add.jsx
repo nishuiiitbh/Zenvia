@@ -4,7 +4,9 @@ import Sidebar from '../component/Sidebar'
 import upload from '../assets/upload image.jpg'
 import { useState } from 'react'
 import { authDataContext } from '../context/AuthContext'
+import axios from 'axios'
 
+import Loading from '../component/Loading'
 
 function Add() {
   let [image1,setImage1] = useState(false)
@@ -41,7 +43,7 @@ function Add() {
       let result = await axios.post(serverUrl + "/api/product/addproduct" , formData, {withCredentials:true} )
 
       console.log(result.data)
-      toast.success("ADD Product Successfully")
+  
       setLoading(false)
 
       if(result.data){
@@ -61,7 +63,7 @@ function Add() {
     } catch (error) {
        console.log(error)
        setLoading(false)
-       toast.error("Add Product Failed")
+      
     }
 
     
