@@ -20,6 +20,7 @@ function Nav() {
     useContext(shopDataContext);
   let [showProfile, setShowProfile] = useState(false);
   let profileRef = useRef(null);
+  let searchRef = useRef(null);
   let navigate = useNavigate();
   const handleLogout = async () => {
     try {
@@ -46,6 +47,24 @@ function Nav() {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
+  useEffect(() => {
+    const handleSearchClickOutside = (event) => {
+      if (
+        showSearch &&
+        searchRef.current &&
+        !searchRef.current.contains(event.target)
+      ) {
+        setShowSearch(false);
+        setSearch("");
+      }
+    };
+
+    document.addEventListener("click", handleSearchClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleSearchClickOutside);
+    };
+  }, [showSearch]);
   return (
     <div className="w-[100vw] h-[70px] bg-[#ecfafaec] z-10 fixed top-0 flex  items-center justify-between px-[30px] shadow-md shadow-black ">
       <div className="w-[20%] lg:w-[30%] flex items-center justify-start   gap-[10px] ">
@@ -123,7 +142,10 @@ function Nav() {
         </p>
       </div>
       {showSearch && (
-        <div className="w-full h-[80px] bg-[#d8f6f9dd] absolute top-[100%] left-0 right-0 flex items-center justify-center px-[15px]">
+        <div
+          ref={searchRef}
+          className="w-full h-[80px] bg-[#d8f6f9dd] absolute top-[100%] left-0 right-0 flex items-center justify-center px-[15px]"
+        >
           <div className="relative w-[80%] lg:w-[50%]">
             <input
               type="text"

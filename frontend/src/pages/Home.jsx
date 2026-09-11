@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Backgound from '../component/Backgound'
+import Backgound from '../component/Background'
 import Hero from '../component/Hero'
 import Product from './Product'
 import OurPolicy from '../component/OurPolicy'
