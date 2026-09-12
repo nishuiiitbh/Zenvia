@@ -80,22 +80,33 @@ function ShopContext({ children }) {
     }
   };
   const updateQuantity = async (itemId, size, quantity) => {
-    let cartData = structuredClone(cartItem);
-    cartData[itemId][size] = quantity;
-    setCartItem(cartData);
+  let cartData = structuredClone(cartItem);
 
-    if (userData) {
-      try {
-        await axios.post(
-          serverUrl + "/api/cart/update",
-          { itemId, size, quantity },
-          { withCredentials: true },
-        );
-      } catch (error) {
-        console.log(error);
-      }
+  if (quantity === 0) {
+    delete cartData[itemId][size];
+
+    // Agar product ke andar koi size nahi bacha
+    if (Object.keys(cartData[itemId]).length === 0) {
+      delete cartData[itemId];
     }
-  };
+  } else {
+    cartData[itemId][size] = quantity;
+  }
+
+  setCartItem(cartData);
+
+  if (userData) {
+    try {
+      await axios.post(
+        serverUrl + "/api/cart/update",
+        { itemId, size, quantity },
+        { withCredentials: true }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
+};
   const getCartCount = () => {
     let totalCount = 0;
     for (const items in cartItem) {

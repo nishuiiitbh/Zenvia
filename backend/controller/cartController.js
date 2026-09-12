@@ -37,14 +37,26 @@ export const addToCart = async (req, res) => {
 export const UpdateCart = async (req, res) => {
   try {
     const { itemId, size, quantity } = req.body;
-    const userData = await User.findById(req.userId);
-    let cartData = await userData.cartData;
 
-    cartData[itemId][size] = quantity;
+    const userData = await User.findById(req.userId);
+    let cartData = userData.cartData || {};
+
+    if (quantity === 0) {
+      // size ko cart se remove karo
+      delete cartData[itemId][size];
+
+      // agar product ke andar koi size nahi bacha
+      if (Object.keys(cartData[itemId]).length === 0) {
+        delete cartData[itemId];
+      }
+    } else {
+      cartData[itemId][size] = quantity;
+    }
 
     await User.findByIdAndUpdate(req.userId, { cartData });
 
     return res.status(201).json({ message: "cart updated" });
+
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "updateCart error" });
