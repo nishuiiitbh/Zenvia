@@ -15,7 +15,7 @@ function AuthContext({children}) {
             {children}
         </authDataContext.Provider>
       
-    </div>
+    </div>    
   )
 }
 
