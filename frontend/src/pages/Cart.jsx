@@ -42,9 +42,10 @@ function Cart() {
             <div key={index} className="w-[100%] h-[10%] border-t border-b  ">
               <div className="w-[100%] h-[80%] flex items-start gap-6 bg-[#51808048]  py-[10px] px-[20px] rounded-2xl relative ">
                 <img
-                  className="w-[100px] h-[100px] rounded-md "
+                  className="w-[100px] h-[100px] rounded-md cursor-pointer"
                   src={productData.image1}
                   alt=""
+                  onClick={() => navigate(`/productdetail/${item._id}`)}
                 />
                 <div className="flex items-start justify-center flex-col gap-[10px]">
                   <p className="md:text-[25px] text-[20px] text-[#f3f9fc]">

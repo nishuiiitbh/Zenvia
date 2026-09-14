@@ -1,32 +1,53 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import logo from "../assets/logo.png";
+
 import { IoSearchCircleOutline } from "react-icons/io5";
+import { IoSearchCircleSharp } from "react-icons/io5";
+import { IoClose } from "react-icons/io5";
+
 import { FaCircleUser } from "react-icons/fa6";
 import { MdOutlineShoppingCart } from "react-icons/md";
-import { userDataContext } from "../context/UserContext";
-import { IoSearchCircleSharp } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
+import { MdOutlineShoppingBag } from "react-icons/md";
+import { MdContacts } from "react-icons/md";
 import { IoMdHome } from "react-icons/io";
 import { HiOutlineCollection } from "react-icons/hi";
-import { IoClose } from "react-icons/io5";
-import { MdContacts } from "react-icons/md";
-import axios from "axios";
+
+import { userDataContext } from "../context/UserContext";
 import { authDataContext } from "../context/authContext";
 import { shopDataContext } from "../context/ShopContext";
+
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
 function Nav() {
-  let { getCurrentUser, userData } = useContext(userDataContext);
+  let { userData } = useContext(userDataContext);
+
   let { serverUrl } = useContext(authDataContext);
-  let { showSearch, setShowSearch, search, setSearch, getCartCount } =
-    useContext(shopDataContext);
+
+  let {
+    showSearch,
+    setShowSearch,
+    search,
+    setSearch,
+    getCartCount,
+  } = useContext(shopDataContext);
+
   let [showProfile, setShowProfile] = useState(false);
+
   let profileRef = useRef(null);
   let searchRef = useRef(null);
+
   let navigate = useNavigate();
+
   const handleLogout = async () => {
     try {
-      const result = await axios.get(serverUrl + "/api/auth/logout", {
-        withCredentials: true,
-      });
+      const result = await axios.get(
+        serverUrl + "/api/auth/logout",
+        {
+          withCredentials: true,
+        }
+      );
+
       console.log(result.data);
 
       navigate("/login");
@@ -34,9 +55,14 @@ function Nav() {
       console.log(error);
     }
   };
+
+  // Close profile when clicked outside
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (profileRef.current && !profileRef.current.contains(event.target)) {
+      if (
+        profileRef.current &&
+        !profileRef.current.contains(event.target)
+      ) {
         setShowProfile(false);
       }
     };
@@ -47,6 +73,8 @@ function Nav() {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
+
+  // Close search when clicked outside
   useEffect(() => {
     const handleSearchClickOutside = (event) => {
       if (
@@ -62,64 +90,108 @@ function Nav() {
     document.addEventListener("click", handleSearchClickOutside);
 
     return () => {
-      document.removeEventListener("click", handleSearchClickOutside);
+      document.removeEventListener(
+        "click",
+        handleSearchClickOutside
+      );
     };
   }, [showSearch]);
+
   return (
-    <div className="w-[100vw] h-[70px] bg-[#ecfafaec] z-10 fixed top-0 flex  items-center justify-between px-[30px] shadow-md shadow-black ">
-      <div className="w-[20%] lg:w-[30%] flex items-center justify-start   gap-[10px] ">
-        <img src={logo} alt="" className="w-[30px]" />
-        <h1 className="text-[25px] text-[black] font-sans ">Zenvia</h1>
+    <div className="w-full h-[70px] bg-[#ecfafaec] z-50 fixed top-0 left-0 flex items-center justify-between px-[15px] sm:px-[25px] lg:px-[30px] shadow-md shadow-black">
+
+      {/* ================= LOGO ================= */}
+      <div className="w-auto lg:w-[25%] flex items-center justify-start gap-[8px] sm:gap-[10px]">
+        <img
+          src={logo}
+          alt="Zenvia"
+          className="w-[27px] sm:w-[30px]"
+        />
+
+        <h1 className="text-[21px] sm:text-[25px] text-black font-sans">
+          Zenvia
+        </h1>
       </div>
-      <div className="w-[50%] lg:w-[40%] hidden md:flex">
-        <ul className="flex items-center justify-center gap-[19px] text-[white] ">
+
+
+      {/* ================= DESKTOP NAVBAR ================= */}
+      <div className="hidden lg:flex flex-1 justify-center">
+        <ul className="flex items-center justify-center gap-[8px] xl:gap-[14px] text-white">
+
+          {/* HOME */}
           <li
-            className="text-[15px] hover:bg-slate-500 cursor-pointer bg-[#000000c9] py-[10px] px-[20px] rounded-2xl"
+            className="text-[12px] xl:text-[14px] hover:bg-slate-500 cursor-pointer bg-[#000000c9] py-[9px] px-[14px] xl:px-[18px] rounded-2xl whitespace-nowrap"
             onClick={() => navigate("/")}
           >
             HOME
           </li>
+
+          {/* COLLECTIONS */}
           <li
-            className="text-[15px] hover:bg-slate-500 cursor-pointer bg-[#000000c9] py-[10px] px-[20px] rounded-2xl"
+            className="text-[12px] xl:text-[14px] hover:bg-slate-500 cursor-pointer bg-[#000000c9] py-[9px] px-[14px] xl:px-[18px] rounded-2xl whitespace-nowrap"
             onClick={() => navigate("/collection")}
           >
             COLLECTIONS
           </li>
+
+          {/* ORDERS */}
           <li
-            className="text-[15px] hover:bg-slate-500 cursor-pointer bg-[#000000c9] py-[10px] px-[20px] rounded-2xl"
+            className="text-[12px] xl:text-[14px] hover:bg-slate-500 cursor-pointer bg-[#000000c9] py-[9px] px-[14px] xl:px-[18px] rounded-2xl whitespace-nowrap"
+            onClick={() => navigate("/order")}
+          >
+            ORDERS
+          </li>
+
+          {/* ABOUT */}
+          <li
+            className="text-[12px] xl:text-[14px] hover:bg-slate-500 cursor-pointer bg-[#000000c9] py-[9px] px-[14px] xl:px-[18px] rounded-2xl whitespace-nowrap"
             onClick={() => navigate("/about")}
           >
             ABOUT
           </li>
+
+          {/* CONTACT */}
           <li
-            className="text-[15px] hover:bg-slate-500 cursor-pointer bg-[#000000c9] py-[10px] px-[20px] rounded-2xl"
+            className="text-[12px] xl:text-[14px] hover:bg-slate-500 cursor-pointer bg-[#000000c9] py-[9px] px-[14px] xl:px-[18px] rounded-2xl whitespace-nowrap"
             onClick={() => navigate("/contact")}
           >
             CONTACT
           </li>
+
         </ul>
       </div>
-      <div className="w-[30%] flex items-center justify-end gap-[20px]">
+
+
+      {/* ================= RIGHT SIDE ================= */}
+      <div className="w-auto lg:w-[25%] flex items-center justify-end gap-[10px] sm:gap-[15px]">
+
+        {/* SEARCH */}
         {!showSearch && (
           <IoSearchCircleOutline
-            className="w-[38px] h-[38px] text-[#000000]  cursor-pointer"
+            className="w-[31px] h-[31px] sm:w-[36px] sm:h-[36px] text-black cursor-pointer"
             onClick={() => {
               setShowSearch((prev) => !prev);
               navigate("/collection");
             }}
           />
         )}
+
         {showSearch && (
           <IoSearchCircleSharp
-            className="w-[38px] h-[38px] text-[#000000]  cursor-pointer"
+            className="w-[31px] h-[31px] sm:w-[36px] sm:h-[36px] text-black cursor-pointer"
             onClick={() => setShowSearch((prev) => !prev)}
           />
         )}
+
+
+        {/* PROFILE */}
         {!userData && (
           <div ref={profileRef}>
             <FaCircleUser
-              className="w-[29px] h-[29px] text-[#000000] cursor-pointer"
-              onClick={() => setShowProfile((prev) => !prev)}
+              className="w-[26px] h-[26px] sm:w-[29px] sm:h-[29px] text-black cursor-pointer"
+              onClick={() =>
+                setShowProfile((prev) => !prev)
+              }
             />
           </div>
         )}
@@ -127,51 +199,72 @@ function Nav() {
         {userData && (
           <div
             ref={profileRef}
-            className="w-[30px] h-[30px] bg-[#080808] text-[white] rounded-full flex items-center justify-center cursor-pointer"
-            onClick={() => setShowProfile((prev) => !prev)}
+            className="w-[29px] h-[29px] sm:w-[30px] sm:h-[30px] bg-[#080808] text-white rounded-full flex items-center justify-center cursor-pointer text-sm"
+            onClick={() =>
+              setShowProfile((prev) => !prev)
+            }
           >
-            {userData?.name.slice(0, 1)}
+            {userData?.name?.slice(0, 1)}
           </div>
         )}
-        <MdOutlineShoppingCart
-          className="w-[30px] h-[30px] text-[#000000]  cursor-pointer hidden md:block"
-          onClick={() => navigate("/cart")}
-        />
-        <p className="absolute w-[18px] h-[18px] items-center  justify-center bg-black px-[5px] py-[2px] text-white  rounded-full text-[9px] top-[10px] right-[23px] hidden md:block">
-          {getCartCount()}
-        </p>
+
+
+        {/* DESKTOP CART */}
+        <div className="relative hidden lg:block">
+          <MdOutlineShoppingCart
+            className="w-[29px] h-[29px] text-black cursor-pointer"
+            onClick={() => navigate("/cart")}
+          />
+
+          <p className="absolute w-[17px] h-[17px] flex items-center justify-center bg-black text-white rounded-full text-[9px] -top-[7px] -right-[8px]">
+            {getCartCount()}
+          </p>
+        </div>
+
       </div>
+
+
+      {/* ================= SEARCH BOX ================= */}
       {showSearch && (
         <div
           ref={searchRef}
-          className="w-full h-[80px] bg-[#d8f6f9dd] absolute top-[100%] left-0 right-0 flex items-center justify-center px-[15px]"
+          className="w-full h-[75px] sm:h-[80px] bg-[#d8f6f9dd] absolute top-[100%] left-0 flex items-center justify-center px-[15px]"
         >
-          <div className="relative w-[80%] lg:w-[50%]">
+          <div className="relative w-[90%] sm:w-[80%] lg:w-[50%]">
+
             <input
               type="text"
-              className="w-full h-[50px] bg-[#233533] rounded-[30px] px-[25px] pr-[55px] placeholder:text-white text-white text-[16px] outline-none"
+              className="w-full h-[48px] sm:h-[50px] bg-[#233533] rounded-[30px] px-[20px] sm:px-[25px] pr-[55px] placeholder:text-white text-white text-[15px] sm:text-[16px] outline-none"
               placeholder="Search Here"
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={(e) =>
+                setSearch(e.target.value)
+              }
               value={search}
             />
 
             <IoClose
-              className="absolute right-[18px] top-1/2 -translate-y-1/2 w-[28px] h-[28px] text-white cursor-pointer hover:text-gray-300"
+              className="absolute right-[17px] top-1/2 -translate-y-1/2 w-[26px] h-[26px] text-white cursor-pointer"
               onClick={() => {
                 setShowSearch(false);
                 setSearch("");
               }}
             />
+
           </div>
         </div>
       )}
 
+
+      {/* ================= PROFILE DROPDOWN ================= */}
       {showProfile && (
-        <div className="absolute w-[220px] h-[150px] bg-[#000000d7] top-[110%] right-[4%] border-[1px] border-[#aaa9a9] rounded-[10px] z-10">
-          <ul className="w-[100%] h-[100%] flex items-start justify-around flex-col text-[17px] py-[10px] text-[white]">
+        <div className="absolute w-[200px] sm:w-[220px] h-[150px] bg-[#000000e8] top-[110%] right-[3%] border border-[#aaa9a9] rounded-[10px] z-50">
+
+          <ul className="w-full h-full flex items-start justify-around flex-col text-[16px] sm:text-[17px] py-[10px] text-white">
+
+            {/* LOGIN */}
             {!userData && (
               <li
-                className="w-[100%] hover:bg-[#2f2f2f]  px-[15px] py-[10px] cursor-pointer"
+                className="w-full hover:bg-[#2f2f2f] px-[15px] py-[9px] cursor-pointer"
                 onClick={() => {
                   navigate("/login");
                   setShowProfile(false);
@@ -180,9 +273,11 @@ function Nav() {
                 Login
               </li>
             )}
+
+            {/* LOGOUT */}
             {userData && (
               <li
-                className="w-[100%] hover:bg-[#2f2f2f]  px-[15px] py-[10px] cursor-pointer"
+                className="w-full hover:bg-[#2f2f2f] px-[15px] py-[9px] cursor-pointer"
                 onClick={() => {
                   handleLogout();
                   setShowProfile(false);
@@ -191,8 +286,10 @@ function Nav() {
                 LogOut
               </li>
             )}
+
+            {/* ORDERS */}
             <li
-              className="w-[100%] hover:bg-[#2f2f2f]  px-[15px] py-[10px] cursor-pointer"
+              className="w-full hover:bg-[#2f2f2f] px-[15px] py-[9px] cursor-pointer"
               onClick={() => {
                 navigate("/order");
                 setShowProfile(false);
@@ -200,8 +297,10 @@ function Nav() {
             >
               Orders
             </li>
+
+            {/* ABOUT */}
             <li
-              className="w-[100%] hover:bg-[#2f2f2f]  px-[15px] py-[10px] cursor-pointer"
+              className="w-full hover:bg-[#2f2f2f] px-[15px] py-[9px] cursor-pointer"
               onClick={() => {
                 navigate("/about");
                 setShowProfile(false);
@@ -209,44 +308,72 @@ function Nav() {
             >
               About
             </li>
+
           </ul>
         </div>
       )}
-      <div
-        className="w-[100vw] h-[90px] flex items-center justify-between px-[20px] text-[12px]
-         fixed bottom-0 left-0 bg-[#191818]   md:hidden"
-      >
+
+
+      {/* ================= MOBILE BOTTOM NAVBAR ================= */}
+      <div className="w-full h-[72px] sm:h-[78px] flex items-center justify-around px-[5px] sm:px-[15px] text-[10px] sm:text-[11px] fixed bottom-0 left-0 bg-[#191818] lg:hidden z-50">
+
+        {/* HOME */}
         <button
-          className="text-[white] flex items-center justify-center flex-col gap-[2px]"
+          className="text-white flex items-center justify-center flex-col gap-[2px] min-w-[55px]"
           onClick={() => navigate("/")}
         >
-          <IoMdHome className="w-[28px] h-[28px] text-[white] md:hidden" /> Home
+          <IoMdHome className="w-[25px] h-[25px] sm:w-[28px] sm:h-[28px]" />
+          Home
         </button>
+
+
+        {/* COLLECTIONS */}
         <button
-          className="text-[white] flex items-center justify-center flex-col gap-[2px]"
-          onClick={() => navigate("collection")}
+          className="text-white flex items-center justify-center flex-col gap-[2px] min-w-[65px]"
+          onClick={() => navigate("/collection")}
         >
-          <HiOutlineCollection className="w-[28px] h-[28px] text-[white] md:hidden" />{" "}
+          <HiOutlineCollection className="w-[25px] h-[25px] sm:w-[28px] sm:h-[28px]" />
           Collections
         </button>
+
+
+        {/* ORDERS */}
         <button
-          className="text-[white] flex items-center justify-center flex-col gap-[2px] "
+          className="text-white flex items-center justify-center flex-col gap-[2px] min-w-[55px]"
+          onClick={() => navigate("/order")}
+        >
+          <MdOutlineShoppingBag className="w-[25px] h-[25px] sm:w-[28px] sm:h-[28px]" />
+          Orders
+        </button>
+
+
+        {/* CONTACT */}
+        <button
+          className="text-white flex items-center justify-center flex-col gap-[2px] min-w-[55px]"
           onClick={() => navigate("/contact")}
         >
-          <MdContacts className="w-[28px] h-[28px] text-[white] md:hidden" />
+          <MdContacts className="w-[25px] h-[25px] sm:w-[28px] sm:h-[28px]" />
           Contact
         </button>
+
+
+        {/* CART */}
         <button
-          className="text-[white] flex items-center justify-center flex-col gap-[2px]"
+          className="text-white flex items-center justify-center flex-col gap-[2px] min-w-[55px] relative"
           onClick={() => navigate("/cart")}
         >
-          <MdOutlineShoppingCart className="w-[28px] h-[28px] text-[white] md:hidden" />{" "}
-          Cart
+          <MdOutlineShoppingCart className="w-[25px] h-[25px] sm:w-[28px] sm:h-[28px]" />
+
+          <span>Cart</span>
+
+          {/* CART COUNT */}
+          <p className="absolute w-[17px] h-[17px] flex items-center justify-center bg-white text-black font-semibold rounded-full text-[9px] -top-[5px] right-[7px]">
+            {getCartCount()}
+          </p>
         </button>
-        <p className="absolute w-[18px] h-[18px] flex items-center justify-center bg-white px-[5px] py-[2px] text-black font-semibold  rounded-full text-[9px] top-[8px] right-[18px]">
-          {getCartCount()}
-        </p>
+
       </div>
+
     </div>
   );
 }
