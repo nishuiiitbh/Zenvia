@@ -17,7 +17,7 @@ let app = express()
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
- origin:["https://zenvia-frontend.onrender.com" , "http://localhost:5174"],
+ origin:["https://zenvia-frontend.onrender.com" , "https://zenvia-admin.onrender.com"],
  credentials:true
 }))
 
@@ -29,7 +29,7 @@ app.use("/api/order",orderRoutes)
 
 
 
-    
+
 app.listen(port,()=>{
     console.log("Hello From Server")
     connectDb()
