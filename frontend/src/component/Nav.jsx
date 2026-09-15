@@ -1,27 +1,18 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import logo from "../assets/logo.png";
-
-import { IoSearchCircleOutline } from "react-icons/io5";
-import { IoSearchCircleSharp } from "react-icons/io5";
-import { IoClose } from "react-icons/io5";
-
+import { IoSearchCircleOutline, IoSearchCircleSharp, IoClose } from "react-icons/io5";
 import { FaCircleUser } from "react-icons/fa6";
-import { MdOutlineShoppingCart } from "react-icons/md";
-import { MdOutlineShoppingBag } from "react-icons/md";
-import { MdContacts } from "react-icons/md";
+import { MdOutlineShoppingCart, MdOutlineShoppingBag, MdContacts } from "react-icons/md";
 import { IoMdHome } from "react-icons/io";
 import { HiOutlineCollection } from "react-icons/hi";
-
 import { userDataContext } from "../context/UserContext";
 import { authDataContext } from "../context/AuthContext";
 import { shopDataContext } from "../context/ShopContext";
-
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Nav() {
-  let { userData } = useContext(userDataContext);
-
+  let { userData, setUserData } = useContext(userDataContext);
   let { serverUrl } = useContext(authDataContext);
 
   let {
@@ -49,14 +40,14 @@ function Nav() {
       );
 
       console.log(result.data);
-
+      setUserData(null);
+      setShowProfile(false);
       navigate("/login");
     } catch (error) {
       console.log(error);
     }
   };
 
-  // Close profile when clicked outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -74,7 +65,6 @@ function Nav() {
     };
   }, []);
 
-  // Close search when clicked outside
   useEffect(() => {
     const handleSearchClickOutside = (event) => {
       if (
@@ -100,7 +90,6 @@ function Nav() {
   return (
     <div className="w-full h-[70px] bg-[#ecfafaec] z-50 fixed top-0 left-0 flex items-center justify-between px-[15px] sm:px-[25px] lg:px-[30px] shadow-md shadow-black">
 
-      {/* ================= LOGO ================= */}
       <div className="w-auto lg:w-[25%] flex items-center justify-start gap-[8px] sm:gap-[10px]">
         <img
           src={logo}
@@ -113,12 +102,9 @@ function Nav() {
         </h1>
       </div>
 
-
-      {/* ================= DESKTOP NAVBAR ================= */}
       <div className="hidden lg:flex flex-1 justify-center">
         <ul className="flex items-center justify-center gap-[8px] xl:gap-[14px] text-white">
 
-          {/* HOME */}
           <li
             className="text-[12px] xl:text-[14px] hover:bg-slate-500 cursor-pointer bg-[#000000c9] py-[9px] px-[14px] xl:px-[18px] rounded-2xl whitespace-nowrap"
             onClick={() => navigate("/")}
@@ -126,7 +112,6 @@ function Nav() {
             HOME
           </li>
 
-          {/* COLLECTIONS */}
           <li
             className="text-[12px] xl:text-[14px] hover:bg-slate-500 cursor-pointer bg-[#000000c9] py-[9px] px-[14px] xl:px-[18px] rounded-2xl whitespace-nowrap"
             onClick={() => navigate("/collection")}
@@ -134,7 +119,6 @@ function Nav() {
             COLLECTIONS
           </li>
 
-          {/* ORDERS */}
           <li
             className="text-[12px] xl:text-[14px] hover:bg-slate-500 cursor-pointer bg-[#000000c9] py-[9px] px-[14px] xl:px-[18px] rounded-2xl whitespace-nowrap"
             onClick={() => navigate("/order")}
@@ -142,7 +126,6 @@ function Nav() {
             ORDERS
           </li>
 
-          {/* ABOUT */}
           <li
             className="text-[12px] xl:text-[14px] hover:bg-slate-500 cursor-pointer bg-[#000000c9] py-[9px] px-[14px] xl:px-[18px] rounded-2xl whitespace-nowrap"
             onClick={() => navigate("/about")}
@@ -150,7 +133,6 @@ function Nav() {
             ABOUT
           </li>
 
-          {/* CONTACT */}
           <li
             className="text-[12px] xl:text-[14px] hover:bg-slate-500 cursor-pointer bg-[#000000c9] py-[9px] px-[14px] xl:px-[18px] rounded-2xl whitespace-nowrap"
             onClick={() => navigate("/contact")}
@@ -161,11 +143,8 @@ function Nav() {
         </ul>
       </div>
 
-
-      {/* ================= RIGHT SIDE ================= */}
       <div className="w-auto lg:w-[25%] flex items-center justify-end gap-[10px] sm:gap-[15px]">
 
-        {/* SEARCH */}
         {!showSearch && (
           <IoSearchCircleOutline
             className="w-[31px] h-[31px] sm:w-[36px] sm:h-[36px] text-black cursor-pointer"
@@ -183,8 +162,6 @@ function Nav() {
           />
         )}
 
-
-        {/* PROFILE */}
         {!userData && (
           <div ref={profileRef}>
             <FaCircleUser
@@ -208,8 +185,6 @@ function Nav() {
           </div>
         )}
 
-
-        {/* DESKTOP CART */}
         <div className="relative hidden lg:block">
           <MdOutlineShoppingCart
             className="w-[29px] h-[29px] text-black cursor-pointer"
@@ -223,8 +198,6 @@ function Nav() {
 
       </div>
 
-
-      {/* ================= SEARCH BOX ================= */}
       {showSearch && (
         <div
           ref={searchRef}
@@ -254,14 +227,11 @@ function Nav() {
         </div>
       )}
 
-
-      {/* ================= PROFILE DROPDOWN ================= */}
       {showProfile && (
         <div className="absolute w-[200px] sm:w-[220px] h-[150px] bg-[#000000e8] top-[110%] right-[3%] border border-[#aaa9a9] rounded-[10px] z-50">
 
           <ul className="w-full h-full flex items-start justify-around flex-col text-[16px] sm:text-[17px] py-[10px] text-white">
 
-            {/* LOGIN */}
             {!userData && (
               <li
                 className="w-full hover:bg-[#2f2f2f] px-[15px] py-[9px] cursor-pointer"
@@ -274,20 +244,15 @@ function Nav() {
               </li>
             )}
 
-            {/* LOGOUT */}
             {userData && (
               <li
                 className="w-full hover:bg-[#2f2f2f] px-[15px] py-[9px] cursor-pointer"
-                onClick={() => {
-                  handleLogout();
-                  setShowProfile(false);
-                }}
+                onClick={handleLogout}
               >
                 LogOut
               </li>
             )}
 
-            {/* ORDERS */}
             <li
               className="w-full hover:bg-[#2f2f2f] px-[15px] py-[9px] cursor-pointer"
               onClick={() => {
@@ -298,7 +263,6 @@ function Nav() {
               Orders
             </li>
 
-            {/* ABOUT */}
             <li
               className="w-full hover:bg-[#2f2f2f] px-[15px] py-[9px] cursor-pointer"
               onClick={() => {
@@ -313,11 +277,8 @@ function Nav() {
         </div>
       )}
 
-
-      {/* ================= MOBILE BOTTOM NAVBAR ================= */}
       <div className="w-full h-[72px] sm:h-[78px] flex items-center justify-around px-[5px] sm:px-[15px] text-[10px] sm:text-[11px] fixed bottom-0 left-0 bg-[#191818] lg:hidden z-50">
 
-        {/* HOME */}
         <button
           className="text-white flex items-center justify-center flex-col gap-[2px] min-w-[55px]"
           onClick={() => navigate("/")}
@@ -326,8 +287,6 @@ function Nav() {
           Home
         </button>
 
-
-        {/* COLLECTIONS */}
         <button
           className="text-white flex items-center justify-center flex-col gap-[2px] min-w-[65px]"
           onClick={() => navigate("/collection")}
@@ -336,8 +295,6 @@ function Nav() {
           Collections
         </button>
 
-
-        {/* ORDERS */}
         <button
           className="text-white flex items-center justify-center flex-col gap-[2px] min-w-[55px]"
           onClick={() => navigate("/order")}
@@ -346,8 +303,6 @@ function Nav() {
           Orders
         </button>
 
-
-        {/* CONTACT */}
         <button
           className="text-white flex items-center justify-center flex-col gap-[2px] min-w-[55px]"
           onClick={() => navigate("/contact")}
@@ -356,8 +311,6 @@ function Nav() {
           Contact
         </button>
 
-
-        {/* CART */}
         <button
           className="text-white flex items-center justify-center flex-col gap-[2px] min-w-[55px] relative"
           onClick={() => navigate("/cart")}
@@ -366,7 +319,6 @@ function Nav() {
 
           <span>Cart</span>
 
-          {/* CART COUNT */}
           <p className="absolute w-[17px] h-[17px] flex items-center justify-center bg-white text-black font-semibold rounded-full text-[9px] -top-[5px] right-[7px]">
             {getCartCount()}
           </p>
