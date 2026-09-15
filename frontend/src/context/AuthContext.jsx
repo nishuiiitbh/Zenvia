@@ -2,7 +2,7 @@ import React from 'react'
 import { createContext } from 'react'
 export const authDataContext= createContext()
 function AuthContext({children}) {
-    let serverUrl = "https://zenvia-backend-c2nt.onrender.com"
+    let serverUrl = ""
 
     let value = {
        serverUrl
