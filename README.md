@@ -201,26 +201,37 @@ The backend uses MongoDB for persistent data storage and Cloudinary for product 
 * Improved product filtering and sorting
   ## 📸 Screenshots
 
-### Login
-![Login Page](./Screenshot%202026-09-15%20220242.png)
+### 🔐 Login
+![Login Page](./Screenshot%202026-09-15%20220113.png)
 
-### Home
+### 🏠 Home
 ![Home Page](./Screenshot%202026-09-15%20220211.png)
 
-### Collections
-![Collections](./Screenshot%202026-09-15%20220258.png)
+### 🛍️ Collections
+![Collections](./Screenshot%202026-09-15%20220242.png)
 
-### Product Details
+### 📦 Orders
+![Orders](./Screenshot%202026-09-15%20220200.png)
+
+### 👕 Product Details
 ![Product Details](./Screenshot%202026-09-15%20220515.png)
 
-### Checkout & Payment
-![Checkout](./Screenshot%202026-09-15%20220535.png)
+### 🛒 Cart
+![Cart](./Screenshot%202026-09-15%20220535.png)
 
-### Admin Dashboard
-![Admin Dashboard](./Screenshot%202026-09-15%20220546.png)
+### 💳 Checkout & Payment
+![Checkout](./Screenshot%202026-09-15%20220546.png)
 
- 👩‍💻 Author-Nishu Kumari
+### 📊 Admin Dashboard
+![Admin Dashboard](./Screenshot%202026-09-15%20220658.png)
 
+### 📋 Admin Products
+![Admin Products](./Screenshot%202026-09-15%20220712.png)
 
+### ➕ Add Product
+![Add Product](./Screenshot%202026-09-15%20220726.png)
+
+### 📦 Admin Orders
+![Admin Orders](./Screenshot%202026-09-15%20220753.png)
 
 
