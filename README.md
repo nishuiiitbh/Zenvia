@@ -210,11 +210,12 @@ The backend uses MongoDB for persistent data storage and Cloudinary for product 
 ### 🛍️ Collections
 ![Collections](./Screenshot%202026-09-15%20220242.png)
 
-### 📦 Orders
-![Orders](./Screenshot%202026-09-15%20220200.png)
 
 ### 👕 Product Details
 ![Product Details](./Screenshot%202026-09-15%20220515.png)
+
+### 📦 Orders
+![Orders](./Screenshot%202026-09-15%20220200.png)
 
 ### 🛒 Cart
 ![Cart](./Screenshot%202026-09-15%20220535.png)
