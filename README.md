@@ -199,6 +199,25 @@ The backend uses MongoDB for persistent data storage and Cloudinary for product 
 * Product reviews and ratings
 * Advanced admin analytics
 * Improved product filtering and sorting
+  ## 📸 Screenshots
+
+### Login
+![Login Page](./Screenshot%202026-09-15%20220242.png)
+
+### Home
+![Home Page](./Screenshot%202026-09-15%20220211.png)
+
+### Collections
+![Collections](./Screenshot%202026-09-15%20220258.png)
+
+### Product Details
+![Product Details](./Screenshot%202026-09-15%20220515.png)
+
+### Checkout & Payment
+![Checkout](./Screenshot%202026-09-15%20220535.png)
+
+### Admin Dashboard
+![Admin Dashboard](./Screenshot%202026-09-15%20220546.png)
 
  👩‍💻 Author-Nishu Kumari
 
