@@ -40,8 +40,6 @@ Zenvia is a full-stack e-commerce platform built using the MERN stack. It provid
 ## 🛠️ Tech Stack
 
 ### Frontend
-
-### Frontend
 - React.js
 - React Router
 - Axios
@@ -67,33 +65,61 @@ Zenvia is a full-stack e-commerce platform built using the MERN stack. It provid
 * Cloudinary — Image storage
 * Firebase — Google Authentication
 * Render — Deployment
+* Razorpay — Online Payment Processing
 
 ## 📁 Project Structure
 
 ```text
 Zenvia/
 │
-├── frontend/
-│   ├── src/
-│   ├── public/
-│   └── package.json
-│
 ├── admin/
-│   ├── src/
 │   ├── public/
-│   └── package.json
+│   ├── src/
+│   ├── .gitignore
+│   ├── README.md
+│   ├── eslint.config.js
+│   ├── index.html
+│   ├── logo.png
+│   ├── package.json
+│   ├── package-lock.json
+│   └── vite.config.js
 │
 ├── backend/
 │   ├── config/
-│   ├── controllers/
+│   ├── controller/
 │   ├── middleware/
-│   ├── models/
+│   ├── model/
+│   ├── product-images/
+│   ├── public/
 │   ├── routes/
-│   ├── uploads/
-│   └── server.js
+│   ├── index.js
+│   ├── package.json
+│   ├── package-lock.json
+│   └── seedProducts.js
 │
-└── README.md
-```
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   ├── utils/
+│   ├── .gitignore
+│   ├── README.md
+│   ├── eslint.config.js
+│   ├── index.html
+│   ├── package.json
+│   ├── package-lock.json
+│   └── vite.config.js
+│
+├── .gitignore
+├── README.md
+│
+└── Project Screenshots
+    ├── Login
+    ├── Home
+    ├── Collections
+    ├── Orders
+    ├── Product Details
+    ├── Checkout & Payment
+    └── Admin Dashboard
 
 ## 🔑 Authentication
 
